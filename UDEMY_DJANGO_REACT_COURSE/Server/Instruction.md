@@ -1,1 +1,0 @@
-* django-admin.exe startproject first .
