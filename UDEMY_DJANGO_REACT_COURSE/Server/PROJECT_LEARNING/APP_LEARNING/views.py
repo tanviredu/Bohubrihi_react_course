@@ -25,3 +25,12 @@ class Another(View):
 
     def get(self,request):
         return HttpResponse(self.output)
+
+def rendermyhtml(request):
+    return render(request,'index.html')   
+
+def renderdynamictemplate(request):
+    books = Book.objects.all();
+    return render(request,'dynamic.html',{'books':books})
+
+
