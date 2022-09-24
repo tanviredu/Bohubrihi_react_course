@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from .models import Book
-
+from .serializers import BookSerializer
+from rest_framework import viewsets
 
 def first(request):
     return HttpResponse("Testing")
@@ -17,14 +18,6 @@ def get_only_books(request):
     book = Book.objects.get(id = 1)
     return HttpResponse(book);
 
-class Another(View):
-    books  = Book.objects.all()
-    output = ''
-    for book in books:
-        output += "we have {} books in out database </br>".format(book.title)
-
-    def get(self,request):
-        return HttpResponse(self.output)
 
 def rendermyhtml(request):
     return render(request,'index.html')   
@@ -34,3 +27,15 @@ def renderdynamictemplate(request):
     return render(request,'dynamic.html',{'books':books})
 
 
+class Another(View):
+    books  = Book.objects.all()
+    output = ''
+    for book in books:
+        output += "we have {} books in out database </br>".format(book.title)
+
+    def get(self,request):
+        return HttpResponse(self.output)
+
+class BookViewSet(viewsets.ModelViewSet):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()

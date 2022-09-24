@@ -2,10 +2,11 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns,static
-
+from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("app1/",include('APP_LEARNING.urls'))
+    path("app/",include('APP_LEARNING.urls')),
+    path("auth/",obtain_auth_token)
     
 ]
 
