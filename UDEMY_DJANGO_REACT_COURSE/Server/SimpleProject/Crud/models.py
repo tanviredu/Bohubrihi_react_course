@@ -37,4 +37,4 @@ class Author(models.Model):
     books        = models.ManyToManyField(Book,related_name='authors')
 
     def __str__(self):
-        return self.name
+        return str(self.name)
